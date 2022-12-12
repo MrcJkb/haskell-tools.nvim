@@ -6,9 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Rockspec for automatic dependency management by luarocks
 - Support for `hls-cabal-plugin` and `hls-cabal-fmt` plugins.
 ### Fixed
 - Packer init in minimal config for reproducing issues locally.
+  themes, etc. can be supported.
 
 ## [1.4.4] - 2022-12-20
 ### Fixed
@@ -16,8 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   themes, etc. can be supported.
 
 ## [1.4.3] - 2022-12-06
-### Added
-- rockspec for automatic dependency management by luarocks
 ### Fixed
 - Error message shown if hoogle is installed, but telescope is missing
 
