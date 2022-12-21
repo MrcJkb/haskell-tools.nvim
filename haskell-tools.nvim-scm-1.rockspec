@@ -22,7 +22,8 @@ dependencies = {
 }
 
 source = {
-	url = "http://github.com/MrcJkb/haskell-tools.nvim/archive/v" .. MODREV .. ".zip",
+	url = "http://github.com/MrcJkb/haskell-tools.nvim/archive/" .. MODREV .. ".zip",
+  dir = 'haskell-tools.nvim-' .. MODREV
 }
 
 if MODREV == "scm" then
