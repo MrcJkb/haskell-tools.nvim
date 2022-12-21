@@ -1,6 +1,6 @@
 local MODREV, SPECREV = "scm", "-1"
 rockspec_format = "3.0"
-package = "haskell_tools.nvim"
+package = "haskell-tools.nvim"
 version = MODREV .. SPECREV
 
 description = {
