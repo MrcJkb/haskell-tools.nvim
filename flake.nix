@@ -94,6 +94,7 @@
           zlib
           alejandra
           stylua
+          lua51Packages.luarocks
         ];
       };
   in {
