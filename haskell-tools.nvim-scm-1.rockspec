@@ -15,10 +15,10 @@ description = {
 }
 
 dependencies = {
-  'lua >= 5.1, < 5.4',
+  'lua >= 5.1',
   'nvim-lspconfig',
   'plenary.nvim',
-  -- "telescope.nvim", -- TODO: Uncomment if telescope.nvim is added to luarocks
+  'telescope.nvim',
 }
 
 source = {
