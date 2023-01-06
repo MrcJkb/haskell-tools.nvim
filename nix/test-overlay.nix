@@ -1,4 +1,5 @@
 {
+  self,
   packer-nvim,
   plenary-nvim,
   nvim-lspconfig,
@@ -8,6 +9,51 @@ with final.lib;
 with final.lib.strings;
 with final.stdenv; let
   nvim-nightly = final.neovim-nightly;
+
+  haskell-tools-nvim = final.pkgs.vimUtils.buildVimPluginFrom2Nix {
+    name = "haskell-tools";
+    src = self;
+  };
+  nvim-wrapped = final.pkgs.wrapNeovim final.pkgs.neovim-unwrapped {
+    configure = {
+      customRC = ''
+        lua << EOF
+        vim.cmd('runtime! plugin/plenary.vim')
+        EOF
+      '';
+      packages.myVimPackage = {
+        start = [
+          haskell-tools-nvim
+          final.pkgs.vimPlugins.plenary-nvim
+          final.pkgs.vimPlugins.nvim-lspconfig
+        ];
+      };
+    };
+  };
+
+  haskell-tools-test-nvim-wrapped = mkDerivation {
+    name = "haskell-tools-test-nvim-wrapped";
+
+    phases = [
+      "buildPhase"
+      "checkPhase"
+    ];
+
+    doCheck = true;
+
+    buildInputs = [
+      nvim-wrapped
+    ];
+
+    buildPhase = ''
+      mkdir -p $out
+    '';
+
+    checkPhase = ''
+      cd ${./..}
+      nvim --headless --noplugin -c "PlenaryBustedDirectory tests {}"
+    '';
+  };
 
   mkPlenaryTest = {
     name,
@@ -25,10 +71,9 @@ with final.stdenv; let
 
       doCheck = true;
 
-      buildInputs = with final;
+      buildInputs =
         [
           nvim
-          makeWrapper
         ]
         ++ extraPkgs;
 
@@ -81,4 +126,6 @@ in {
     withTelescope = false;
     extraPkgs = [final.pkgs.haskellPackages.hoogle];
   };
+
+  inherit haskell-tools-test-nvim-wrapped;
 }
