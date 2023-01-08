@@ -86,6 +86,7 @@
     shellFor = system: let
       pkgs = pkgsFor system;
       pre-commit-check = pre-commit-check-for system;
+      luarocks-upload = pkgs.callPackage ./nix/luarocks-upload.nix {inherit self;};
     in
       pkgs.mkShell {
         name = "haskell-tools.nvim-shell";
@@ -94,6 +95,9 @@
           zlib
           alejandra
           stylua
+          luarocks-upload
+          lua51Packages.luarocks
+          lua51Packages.dkjson
         ];
       };
   in {
