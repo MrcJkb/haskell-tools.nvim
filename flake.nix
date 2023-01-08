@@ -55,6 +55,7 @@
     pkgsFor = system: import nixpkgs {inherit system;};
 
     test-overlay = import ./nix/test-overlay.nix {
+      inherit self;
       inherit
         (inputs)
         packer-nvim
@@ -134,6 +135,7 @@
         haskell-tools-test-nightly
         haskell-tools-test-no-telescope-nightly
         haskell-tools-test-no-telescope-with-hoogle-nightly
+        haskell-tools-test-nvim-wrapped
         ;
     });
   };
